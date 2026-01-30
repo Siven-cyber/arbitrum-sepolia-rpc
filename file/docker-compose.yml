@@ -1,0 +1,30 @@
+services:
+  sepolia-arb-rpc:
+    container_name: sepolia-arb-rpc
+    image: offchainlabs/nitro-node:v3.9.3-8bc5554
+    user: 0:0
+    restart: unless-stopped
+    stop_grace_period: 5m
+    command:
+      --chain.id=421614
+      --parent-chain.connection.url=https://geth.agnc.my.id
+      --parent-chain.blob-client.beacon-url=https://prysm.agnc.my.id
+      --http.api=net,web3,eth
+      --http.corsdomain=*
+      --http.addr=0.0.0.0
+      --http.vhosts=*
+      --http.port=22557
+      --ws.addr 0.0.0.0
+      --ws.port=22558
+      --ws.origins=*
+    volumes:
+      - ./arb-data:/root/.arbitrum
+    ports:
+      - 22557:22557 # json-rpc endpoint
+      - 22558:22558 # ws endpoint
+    networks:
+      - cnid
+
+networks:
+  cnid:
+    external: true
