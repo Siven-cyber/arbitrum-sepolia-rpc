@@ -1,5 +1,5 @@
 # arbitrum-sepolia-rpc
 
-mkdir arb-data
-nano docker-compose.yml
+mkdir arb-data \
+nano docker-compose.yml \
 docker compose up -d
